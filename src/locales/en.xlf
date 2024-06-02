@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="1644123854549792901" datatype="html">
+        <source>ng Localize</source>
+      </trans-unit>
+      <trans-unit id="5236029444167617860" datatype="html">
+        <source>listener</source>
+      </trans-unit>
+      <trans-unit id="6936956398865852495" datatype="html">
+        <source>instead</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

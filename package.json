@@ -1,0 +1,78 @@
+{
+  "name": "webapp",
+  "version": "18.0.0",
+  "description": "Build web app use Angular + Material, tailwindcss with base setup. Support many build mode as SPA, SSR, SPA + localize, SSR + localize, see README.md",
+  "author": {
+    "name": "DN"
+  },
+  "keywords": [
+    "Angular",
+    "Angular Material",
+    "Angular app structure",
+    "Angular app structure template"
+  ],
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "i18n": "ng extract-i18n",
+    "dev": "ng serve --configuration=dev",
+    "dev:ssr": "ng serve --configuration=dev-ssr",
+    "dev:vi": "ng serve --configuration=dev-vi",
+    "dev:ssr:vi": "ng serve --configuration=dev-ssr-vi",
+    "build": "ng build",
+    "build:i18n": "ng build --localize --output-path=dist/ssr-i18n",
+    "build:spa": "ng build --configuration=spa",
+    "build:i18n:spa": "ng build --configuration=spa-i18n",
+    "watch": "ng build --watch --configuration dev",
+    "test": "ng test",
+    "serve:ssr:v18m3": "node dist/v18m3/server/server.mjs",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@angular/animations": "^18.0.0",
+    "@angular/cdk": "^18.0.1",
+    "@angular/common": "^18.0.0",
+    "@angular/compiler": "^18.0.0",
+    "@angular/core": "^18.0.0",
+    "@angular/forms": "^18.0.0",
+    "@angular/material": "^18.0.1",
+    "@angular/platform-browser": "^18.0.0",
+    "@angular/platform-browser-dynamic": "^18.0.0",
+    "@angular/platform-server": "^18.0.0",
+    "@angular/router": "^18.0.0",
+    "@angular/ssr": "^18.0.2",
+    "express": "^4.18.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.3"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^18.0.2",
+    "@angular/cli": "^18.0.2",
+    "@angular/compiler-cli": "^18.0.0",
+    "@angular/localize": "^18.0.1",
+    "@types/express": "^4.17.17",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^18.18.0",
+    "eslint": "^9.3.0",
+    "husky": "^9.0.11",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^15.2.5",
+    "ng-extract-i18n-merge": "^2.12.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "tailwindcss": "^3.4.3",
+    "typescript": "~5.4.2"
+  },
+  "lint-staged": {
+    "*.{ts,js}": "eslint --fix",
+    "*.{ts,js,html,scss,css}": "prettier --write"
+  }
+}

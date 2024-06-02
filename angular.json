@@ -1,0 +1,188 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "changeDetection": "OnPush"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/ssr",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "spa": {
+              "ssr": false,
+              "prerender": false,
+              "outputPath": "dist/spa"
+            },
+            "spa-i18n": {
+              "outputPath": "dist/spa-i18n",
+              "localize": true,
+              "ssr": false,
+              "prerender": false
+            },
+            "dev": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "ssr": false,
+              "prerender": false
+            },
+            "dev-ssr": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "prerender": true,
+              "ssr": {
+                "entry": "server.ts"
+              }
+            },
+            "dev-vi": {
+              "localize": ["vi"],
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "ssr": false,
+              "prerender": false
+            },
+            "dev-ssr-vi": {
+              "localize": ["vi"],
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "prerender": true,
+              "ssr": {
+                "entry": "server.ts"
+              }
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "app:build:production"
+            },
+            "dev": {
+              "buildTarget": "app:build:dev"
+            },
+            "dev-vi": {
+              "buildTarget": "app:build:dev-vi"
+            },
+            "dev-ssr": {
+              "buildTarget": "app:build:dev-ssr"
+            },
+            "dev-ssr-vi": {
+              "buildTarget": "app:build:dev-ssr-vi"
+            },
+            "spa": {
+              "buildTarget": "app:build:production,spa"
+            }
+          },
+          "defaultConfiguration": "dev"
+        },
+        "extract-i18n": {
+          "builder": "ng-extract-i18n-merge:ng-extract-i18n-merge",
+          "options": {
+            "buildTarget": "app:build",
+            "format": "xlf",
+            "outputPath": "src/locales",
+            "targetFiles": [
+              "vi.xlf",
+              "en.xlf"
+            ],
+            "sourceFile": "en.xlf"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      },
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "en": {
+            "translation": "src/locales/en.xlf"
+          },
+          "vi": {
+            "translation": "src/locales/vi.xlf"
+          }
+        }
+      }
+    }
+  }
+}
