@@ -46,7 +46,7 @@
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
-              "entry": "server.ts"
+              "entry": "src/server.ts"
             }
           },
           "configurations": {
@@ -89,7 +89,7 @@
               "sourceMap": true,
               "prerender": true,
               "ssr": {
-                "entry": "server.ts"
+                "entry": "src/server.ts"
               }
             },
             "dev-vi": {
@@ -107,7 +107,7 @@
               "sourceMap": true,
               "prerender": true,
               "ssr": {
-                "entry": "server.ts"
+                "entry": "src/server.ts"
               }
             }
           },
