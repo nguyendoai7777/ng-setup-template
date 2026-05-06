@@ -66,7 +66,6 @@ fi
 {
 	// ...
 	"lint-staged": {
-		"*.{ts,js}": "eslint --fix",
 		"*.{ts,html,scss,css}": "prettier --write"
 	}
 }
