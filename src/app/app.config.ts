@@ -1,19 +1,30 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { interceptor } from '@interceptor/app.interceptor';
-import { catchingErrorInterceptor } from '@interceptor/catching-error.interceptor';
+import { AppInitConfig, ConfigService } from '@configs';
+import { catchingErrorInterceptor, interceptor } from '@interceptors';
+import { firstValueFrom, tap } from 'rxjs';
 import { routes } from './app.route';
 
 export const appConfig: ApplicationConfig = {
-	providers: [
-		provideZoneChangeDetection({ eventCoalescing: true }),
-		provideHttpClient(withInterceptors([interceptor(), catchingErrorInterceptor()])),
-		provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'top' })),
-		provideAnimationsAsync(),
-		provideAnimationsAsync(),
-		provideAnimationsAsync()
-	]
+  providers: [
+    provideAppInitializer(() => {
+      const http = inject(HttpClient),
+        cg = inject(ConfigService);
+
+      return firstValueFrom(
+        http.get<AppInitConfig>('/config.json').pipe(
+          tap(config => {
+            cg.setConfig(config);
+          })
+        )
+      );
+    }),
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(withFetch(), withInterceptors([interceptor(), catchingErrorInterceptor()])),
+    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'top' })),
+    provideClientHydration(withEventReplay())
+  ]
 };

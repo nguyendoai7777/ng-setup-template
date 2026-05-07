@@ -2,44 +2,48 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@platform/*": ["src/app/shared/utils/platform-detector/*"],
-      "@storage/*": ["src/app/shared/utils/local-storage/*"],
-      "@directives/*": ["src/app/shared/directives/*"],
-      "@layouts/*": ["src/app/ui/layouts/*"],
-      "@components/*": ["src/app/ui/components/*"],
-      "@pages/*": ["src/app/ui/pages/*"],
-      "@guards/*": ["src/app/shared/guards/*"],
-      "@services/*": ["src/app/shared/services/*"],
-      "@interceptor/*": ["src/app/shared/interceptor/*"],
-      "@helper": ["src/app/shared/helper"],
-    },
-    "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "sourceMap": true,
-    "declaration": false,
+    "isolatedModules": true,
     "experimentalDecorators": true,
-    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022",
-    "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "module": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@storage": ["src/app/shared/utils/local-storage"],
+      "@seo": ["src/app/shared/seo"],
+      "@directives": ["src/app/shared/directives"],
+      "@layouts/*": ["src/app/ui/layouts/*"],
+      "@components": ["src/app/ui/components"],
+      "@components/*": ["src/app/ui/components/*"],
+      "@pages/*": ["src/app/ui/pages/*"],
+      "@guards": ["src/app/shared/guards"],
+      "@services": ["src/app/shared/services"],
+      "@interceptors": ["src/app/shared/interceptors"],
+      "@helpers": ["src/app/shared/helpers"],
+      "@utils": ["src/app/shared/utils"],
+      "@configs": ["src/app/shared/configs"],
+      "@typings": ["src/app/shared/typings"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

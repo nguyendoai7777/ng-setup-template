@@ -8,7 +8,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
-          "changeDetection": "OnPush"
+          "viewEncapsulation": "None"
         }
       },
       "root": "",
@@ -16,33 +16,26 @@
       "prefix": "",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/ssr",
-            "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js",
-              "@angular/localize/init"
-            ],
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
-            "styles": [
-              "@angular/material/prebuilt-themes/rose-red.css",
-              "src/styles.scss"
-            ],
-            "scripts": [],
+            "styles": ["src/material-theme.scss", "src/styles.css"],
             "server": "src/main.server.ts",
-            "prerender": true,
+
+            "security": {
+              "allowedHosts": []
+            },
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "polyfills": ["@angular/localize/init"]
           },
           "configurations": {
             "production": {
@@ -63,26 +56,30 @@
             "spa": {
               "ssr": false,
               "prerender": false,
-              "outputPath": "dist/spa"
+              "outputPath": "dist/spa",
+              "outputMode": "static"
             },
             "spa-i18n": {
               "outputPath": "dist/spa-i18n",
               "localize": true,
               "ssr": false,
-              "prerender": false
+              "prerender": false,
+              "outputMode": "static"
             },
             "dev": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
               "ssr": false,
-              "prerender": false
+              "prerender": false,
+              "outputMode": "static"
             },
             "dev-ssr": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
               "prerender": true,
+              "outputMode": "server",
               "ssr": {
                 "entry": "src/server.ts"
               }
@@ -93,7 +90,8 @@
               "extractLicenses": false,
               "sourceMap": true,
               "ssr": false,
-              "prerender": false
+              "prerender": false,
+              "outputMode": "static"
             },
             "dev-ssr-vi": {
               "localize": ["vi"],
@@ -101,6 +99,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "prerender": true,
+              "outputMode": "server",
               "ssr": {
                 "entry": "src/server.ts"
               }
@@ -109,11 +108,12 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "app:build:production"
             },
+
             "dev": {
               "buildTarget": "app:build:dev"
             },
@@ -138,33 +138,14 @@
             "buildTarget": "app:build",
             "format": "xlf",
             "outputPath": "src/locales",
-            "targetFiles": [
-              "vi.xlf",
-              "en.xlf"
-            ],
+            "targetFiles": ["vi.xlf", "en.xlf"],
             "sourceFile": "en.xlf"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "@angular/localize/init"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "@angular/material/prebuilt-themes/rose-red.css",
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "buildTarget": "app:build:dev"
           }
         }
       },
@@ -180,5 +161,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

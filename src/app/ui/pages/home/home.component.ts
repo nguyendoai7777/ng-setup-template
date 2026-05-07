@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { InsteadComponent } from '@components/instead/instead.component';
 
 @Component({
   selector: 'home',
-  imports: [InsteadComponent, MatFormField, MatInput, MatLabel],
+  imports: [MatFormField, MatInput, MatLabel],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent {}

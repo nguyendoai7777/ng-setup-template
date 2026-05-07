@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatAnchor } from '@angular/material/button';
+import { MatAnchor, MatButton } from '@angular/material/button';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { TadaComponent } from '@components/tada/tada.component';
 
 @Component({
   selector: 'main-layout',
-  imports: [RouterOutlet, TadaComponent, MatAnchor, RouterLink],
+  imports: [RouterOutlet, MatAnchor, RouterLink, MatButton],
   template: `
     <h3 class="flex text-red-600">Navbar</h3>
     <div class="navbar">
@@ -19,9 +18,7 @@ import { TadaComponent } from '@components/tada/tada.component';
       </div>
     </div>
     <div class="">Main layout = {{ value }}</div>
-    <div class="grid grid-cols-2">
-      <tada data="123" [(newModel)]="value" />
-    </div>
+    <div class="grid grid-cols-2"></div>
     <router-outlet />
   `,
   styles: ``,
